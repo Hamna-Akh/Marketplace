@@ -4,12 +4,11 @@ use marketplace;
 
 CREATE TABLE UserProfiles (
     UserID INT PRIMARY KEY AUTO_INCREMENT,
-    Username VARCHAR(50) UNIQUE NOT NULL,
     Email VARCHAR(100) UNIQUE NOT NULL,
     Password VARCHAR(100) NOT NULL,
     FirstName VARCHAR(50),
     LastName VARCHAR(50),
-    ProfileType VARCHAR(50)
+    ProfileType ENUM('ADMIN', 'USER')
 );
 
 CREATE TABLE ProductListings (
@@ -18,9 +17,9 @@ CREATE TABLE ProductListings (
     Title VARCHAR(100) NOT NULL,
     Price DECIMAL(10, 2) NOT NULL,
     Description TEXT,
-    Category VARCHAR(50),
+    Category ENUM('CLOTHES', 'ELECTRONICS', 'FURNITURE', 'BEAUTY', 'ENTERTAINMENT'),
     Images TEXT,
-    Status VARCHAR(20) NOT NULL,
+    Status ENUM('ACTIVE', 'INACTIVE','SOLD') NOT NULL,
     FOREIGN KEY (SellerID) REFERENCES UserProfiles(UserID)
 );
 
