@@ -11,7 +11,7 @@ public class MessageService {
 
     private MessageRepository messageRepository;
 
-//    public List<Message> getMessageBySender(int senderId){
-//
-//    }
+    public List<Message> getMessageBySender(int senderId){
+        return messageRepository.findBySenderId(senderId);
+    }
 }
