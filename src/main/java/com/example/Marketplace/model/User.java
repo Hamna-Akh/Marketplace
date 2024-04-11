@@ -24,6 +24,6 @@ public class User {
     @Column(name = "profiletype")
     @Enumerated(EnumType.STRING)
     private ProfileType type;
-    @Column(name = "loggin")
+    @Column(name = "loggedin")
     private boolean loggedIn;
 }
