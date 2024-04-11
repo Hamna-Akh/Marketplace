@@ -24,9 +24,11 @@ public class Product {
     @Column(name = "description")
     private String description;
     @Column(name = "category")
+    @Enumerated(EnumType.STRING)
     private Category category;
     @Column(name = "image")
     private String image;
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private Status status;
 }
