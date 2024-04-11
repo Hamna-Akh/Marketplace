@@ -22,5 +22,6 @@ public class User {
     @Column(name = "lastname")
     private String lastName;
     @Column(name = "profiletype")
+    @Enumerated(EnumType.STRING)
     private ProfileType type;
 }
