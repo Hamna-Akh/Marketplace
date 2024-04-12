@@ -13,7 +13,7 @@ function App() {
             <Route exact path="/" element={<Login />} />
             <Route exact path="/users" element={<CreateUser />} />
             <Route path="/products" element={<DisplayAllProducts />} /> {/* Use element prop instead of component */}
-            <Route path="/product/{id}" element={<DisplayProduct />} /> {/* Use element prop instead of component */}
+            <Route path="/product/:id" element={<DisplayProduct />} /> {/* Use element prop instead of component */}
             </Routes>
      </Router>
   );

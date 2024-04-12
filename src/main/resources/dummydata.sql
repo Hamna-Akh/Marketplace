@@ -1,8 +1,14 @@
-INSERT INTO UserProfiles (Email, Password, FirstName, LastName, ProfileType)
+INSERT INTO UserProfiles (Email, Password, FirstName, LastName, ProfileType, loggedIn)
 VALUES
-('user1@example.com', 'password1', 'John', 'Doe', 'USER'),
-('user2@example.com', 'password2', 'Jane', 'Smith', 'USER'),
-('admin@example.com', 'adminpassword', 'Admin', 'User', 'ADMIN');
+('user1@example.com', 'password1', 'John', 'Doe', 'USER', 0),
+('user2@example.com', 'password2', 'Jane', 'Smith', 'USER', 0),
+('admin@example.com', 'adminpassword', 'Admin', 'User', 'ADMIN', 0),
+('user3@example.com', 'password3', 'Michael', 'Johnson', 'USER', 0),
+('user4@example.com', 'password4', 'Emily', 'Davis', 'USER', 0),
+('user5@example.com', 'password5', 'David', 'Brown', 'USER', 0),
+('user6@example.com', 'password6', 'Sarah', 'Wilson', 'USER', 0),
+('user7@example.com', 'password7', 'Daniel', 'Martinez', 'USER', 0),
+('user8@example.com', 'password8', 'Jennifer', 'Taylor', 'USER', 0);
 
 SELECT * from userprofiles;
 
