@@ -18,11 +18,11 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "senderid")
-    private Integer senderId;
+    private User senderId;
 
     @ManyToOne
     @JoinColumn(name = "receiverid")
-    private Integer reveiverId;
+    private User receiverId;
 
     @Column(name = "timestamp")
     private Date timestamp;
