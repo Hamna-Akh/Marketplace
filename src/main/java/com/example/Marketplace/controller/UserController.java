@@ -58,6 +58,7 @@ public class UserController {
         if (user != null && user.getPassword().equals(loginUser.getPassword())) {
             // Return a success message or a token
             user.setLoggedIn(true);
+            userService.updateUser(user);
             return ResponseEntity.ok("Login successful");
         } else {
             // Return a failure message or handle invalid credentials
