@@ -19,7 +19,7 @@ CREATE TABLE ProductListings (
     Price DECIMAL(10, 2) NOT NULL,
     Description TEXT,
     Category ENUM('CLOTHES', 'ELECTRONICS', 'FURNITURE', 'BEAUTY', 'ENTERTAINMENT'),
-    Images TEXT,
+    Image TEXT,
     Status ENUM('ACTIVE', 'INACTIVE','SOLD') NOT NULL,
     FOREIGN KEY (SellerID) REFERENCES UserProfiles(UserID)
 );
