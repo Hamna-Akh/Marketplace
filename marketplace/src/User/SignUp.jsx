@@ -54,27 +54,16 @@ const SignUp = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-//         setEmail(data.get('email'));
-//         setPassword(data.get('password'));
-//         setFirstName(data.get('firstName'));
-//         setLastName(data.get('lastName'));
 
         try{
-
-        console.log(email,firstName,lastName,profileT);
+//         console.log(email,firstName,lastName,profileT);
         const resp = await axios.post('http://localhost:8080/user', {email, password, firstName, lastName, profileT, loggIn});
 
-        console.log(resp.data);
+//         console.log(resp.data);
         }catch(error) {
 //         for now
         console.log(error.response);
         };
-//         console.log({
-//           firstName: data.get('firstName'),
-//           lastName: data.get('lastName'),
-//           email: data.get('email'),
-//           password: data.get('password'),
-//         });
       };
 
      return (
@@ -160,7 +149,7 @@ const SignUp = () => {
                         </Button>
                         <Grid container justifyContent="flex-end">
                           <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link href="/" variant="body2">
                               Already have an account? Sign in
                             </Link>
                           </Grid>
