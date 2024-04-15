@@ -16,6 +16,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -45,24 +46,24 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [firstName , setFirstName] = useState('');
     const [lastName , setLastName] = useState('');
-    const [profileT , setProfileT ] = useState(type.admin);
+    const [profileT , setProfileT ] = useState(type.user);
     const [loggIn , setLoggIn] = useState(0);
 
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        setEmail(data.get('email'));
-        setPassword(data.get('password'));
-        setFirstName(data.get('firstName'));
-        setLastName(data.get('lastName'));
-        console.log({
-          firstName: data.get('firstName'),
-          lastName: data.get('lastName'),
-          email: data.get('email'),
-          password: data.get('password'),
-        });
+
+        try{
+//         console.log(email,firstName,lastName,profileT);
+        const resp = await axios.post('http://localhost:8080/user', {email, password, firstName, lastName, profileT, loggIn});
+
+//         console.log(resp.data);
+        }catch(error) {
+//         for now
+        console.log(error.response);
+        };
       };
 
      return (
@@ -94,6 +95,7 @@ const SignUp = () => {
                               id="firstName"
                               label="First Name"
                               autoFocus
+                              onChange = {(e) => setFirstName(e.target.value)}
                             />
                           </Grid>
                           <Grid item xs={12} sm={6}>
@@ -104,6 +106,7 @@ const SignUp = () => {
                               label="Last Name"
                               name="lastName"
                               autoComplete="family-name"
+                              onChange ={(e) => setLastName(e.target.value)}
                             />
                           </Grid>
                           <Grid item xs={12}>
@@ -114,6 +117,7 @@ const SignUp = () => {
                               label="Email Address"
                               name="email"
                               autoComplete="email"
+                              onChange = {(e) => setEmail(e.target.value)}
                             />
                           </Grid>
                           <Grid item xs={12}>
@@ -125,6 +129,7 @@ const SignUp = () => {
                               type="password"
                               id="password"
                               autoComplete="new-password"
+                              onChange = {(e) => setPassword(e.target.value)}
                             />
                           </Grid>
                           <Grid item xs={12}>
@@ -144,7 +149,7 @@ const SignUp = () => {
                         </Button>
                         <Grid container justifyContent="flex-end">
                           <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link href="/" variant="body2">
                               Already have an account? Sign in
                             </Link>
                           </Grid>
