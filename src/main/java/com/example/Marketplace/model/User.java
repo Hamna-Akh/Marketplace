@@ -2,10 +2,12 @@ package com.example.Marketplace.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "userprofiles")
 @Data
+@Component
 public class User {
 
     @Id

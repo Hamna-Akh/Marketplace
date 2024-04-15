@@ -59,10 +59,17 @@ public class UserController {
             // Return a success message or a token
             user.setLoggedIn(true);
             userService.updateUser(user);
+            userService.setCurrentUser(user);
             return ResponseEntity.ok("Login successful");
         } else {
             // Return a failure message or handle invalid credentials
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
+    }
+
+    @GetMapping("/currentuser")
+    public ResponseEntity<User> getCurrentUser(){
+        User usr = userService.getCurrentUser();
+        return new ResponseEntity<>(usr, HttpStatus.OK);
     }
 }

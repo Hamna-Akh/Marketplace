@@ -3,6 +3,8 @@ package com.example.Marketplace.controller;
 import com.example.Marketplace.model.Product;
 import com.example.Marketplace.repository.ProductRepository;
 import com.example.Marketplace.service.ProductService;
+import com.example.Marketplace.service.UserService;
+import com.example.Marketplace.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,8 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private UserServiceImpl userService;
 
 
     @GetMapping("/products")
@@ -35,6 +39,7 @@ public class ProductController {
 
     @PostMapping("/products")
     public ResponseEntity<Product> create(@RequestBody Product product){
+        product.setSellerId(userService.getCurrentUser());
         Product newProduct = productService.createProduct(product);
 
         return ResponseEntity.status(HttpStatus.OK).body(newProduct);

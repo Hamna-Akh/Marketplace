@@ -10,6 +10,11 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+
+
+    @Autowired
+    private User currentUser;
     @Autowired
     private UserRepository userRepository;
 
@@ -42,5 +47,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
+    }
+
+
+    public User getCurrentUser(){
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 }
