@@ -34,7 +34,7 @@ function SideNavigationBar() {
               </ListItemIcon>
               <ListItemText primary="Shop" />
             </ListItem>
-            <ListItem button key="Sell">
+            <ListItem button key="Sell" component={Link} to="../sell" >
               <ListItemIcon>
                 <MonetizationOn />
               </ListItemIcon>
