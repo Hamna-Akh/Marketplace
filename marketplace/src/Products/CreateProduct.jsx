@@ -3,15 +3,16 @@ import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Grid
 import axios from 'axios';
 import Layout from '../Layout';
 import Alert from '@mui/lab/Alert';
+import { useNavigate } from 'react-router-dom';
 
 function CreateProduct() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: '',
     price: '',
     description: '',
     category: '',
-    image: '',
-    status: ''
+    image: ''
   });
 
   const [successMessage, setSuccessMessage] = useState('');
@@ -50,18 +51,17 @@ function CreateProduct() {
       return;
     }
     try {
-      await axios.post('http://localhost:8080/products', formData); // Assuming your backend is running on localhost:8080
+      await axios.post('http://localhost:8080/products', {...formData, status: 'ACTIVE'}); // Assuming your backend is running on localhost:8080
       setFormData({
         title: '',
         price: '',
         description: '',
         category: '',
-        image: '',
-        status: ''
+        image: ''
       });
       setSuccessMessage('Product created successfully!');
       setOpenSnackbar(true);
-      // Optionally, redirect to the products list page or show a success message
+      navigate('/sell');  // Redirect to /sell
     } catch (error) {
       console.error('Error creating product:', error);
       // Handle error (e.g., display an error message to the user)
