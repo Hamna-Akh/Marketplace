@@ -3,6 +3,7 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -48,6 +49,7 @@ const SignUp = () => {
     const [lastName , setLastName] = useState('');
     const [profileT , setProfileT ] = useState(type.user);
     const [loggIn , setLoggIn] = useState(0);
+    const navigate = useNavigate();
 
 
 
@@ -64,6 +66,7 @@ const SignUp = () => {
 //         for now
         console.log(error.response);
         };
+        navigate(-1);
       };
 
      return (
