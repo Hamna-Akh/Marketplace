@@ -9,6 +9,7 @@ import Alert from '@mui/lab/Alert';
 function UpdateProduct() {
     const navigate = useNavigate();
     const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const { id } = useParams();
     const [product, setProduct] = useState(null);
@@ -42,6 +43,32 @@ function UpdateProduct() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // Check if all required fields are filled
+        if (!formData.title) {
+            setErrorMessage('Please enter a title');
+            setOpenSnackbar(true);
+            return;
+        }
+
+        if (!formData.price) {
+            setErrorMessage('Please enter a price');
+            setOpenSnackbar(true);
+            return;
+        }
+
+        if (!formData.category) {
+            setErrorMessage('Please enter a category');
+            setOpenSnackbar(true);
+            return;
+        }
+
+        // Check if price is greater than 0
+        if (formData.price <= 0) {
+            setErrorMessage('Price must be greater than 0');
+            setOpenSnackbar(true);
+            return;
+        }
+        
         try {
             await axios.put(`http://localhost:8080/products/${id}`, formData);
             setFormData({
@@ -57,6 +84,7 @@ function UpdateProduct() {
             navigate('/sell');
         } catch (error) {
             console.error('Error updating product:', error);
+            setOpenSnackbar(true);
             // Handle error (e.g., display an error message to the user)
         }
     };
@@ -151,12 +179,16 @@ function UpdateProduct() {
                         </Grid>
                     </Grid>
                 </form>
-                <Snackbar
-                    open={openSnackbar}
-                    autoHideDuration={6000}
-                    onClose={handleCloseSnackbar}
-                    message={successMessage}
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
+                <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+                    {errorMessage ? (
+                        <Alert onClose={handleCloseSnackbar} severity="error">
+                            {errorMessage}
+                        </Alert>
+                    ) : (
+                        <Alert onClose={handleCloseSnackbar} severity="success">
+                            {successMessage}
+                        </Alert>
+                    )}
                 </Snackbar>
             </Box>
         </Layout>
