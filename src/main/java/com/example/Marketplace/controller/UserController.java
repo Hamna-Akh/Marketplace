@@ -33,9 +33,9 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<Void> userAdd(@RequestBody User user) {
+    public ResponseEntity<User> userAdd(@RequestBody User user) {
         userService.addUser(user);
-        return new ResponseEntity<Void>(HttpStatus.CREATED);
+        return new ResponseEntity<User>(user, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/user/{id}")
