@@ -101,15 +101,30 @@ function CreateProduct() {
               </Select>
             </FormControl>
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="Image URL"
-              variant="outlined"
-              name="image"
-              value={formData.image}
-              onChange={handleChange}
-              fullWidth
-            />
+          <Grid item xs={12} container direction="column" alignItems="center">
+              <Grid item xs={12}>
+                <img
+                  width="100%"
+                  name = "image"
+//                   value={formData.image}
+                  src = {formData.image}
+
+                />
+                {console.log(formData.image)}
+              </Grid>
+              <label htmlFor="contained-button-file">
+                 <Button variant="contained" component="span">
+                   Select Image
+                   <input
+                     accept="image/*"
+                     name='upload'
+                     id="contained-button-file"
+                     multiple
+                     type="file"
+                     onChange={handleChange}
+                   />
+                 </Button>
+              </label>
           </Grid>
           <Grid item xs={12}>
             <FormControl variant="outlined" fullWidth>
