@@ -1,8 +1,7 @@
-// CreateProduct.js
-
 import React, { useState } from 'react';
 import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Grid, Snackbar  } from '@mui/material';
 import axios from 'axios';
+import Layout from '../Layout';
 
 function CreateProduct() {
   const [formData, setFormData] = useState({
@@ -47,6 +46,7 @@ function CreateProduct() {
   };
 
   return (
+  <Layout>
     <Box sx={{ maxWidth: 400, margin: 'auto', padding: 2 }}>
       <h1>Create Product</h1>
       <form onSubmit={handleSubmit}>
@@ -137,6 +137,7 @@ function CreateProduct() {
               anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
             />
     </Box>
+    </Layout>
   );
 }
 

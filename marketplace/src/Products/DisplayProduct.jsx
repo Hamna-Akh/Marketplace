@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Layout from '../Layout';
 
 const DisplayProduct = () => {
  const { id } = useParams();
@@ -24,6 +25,7 @@ const DisplayProduct = () => {
   }
 
   return (
+  <Layout>
     <div>
       <h1>{product.title}</h1>
       <p>Price: ${product.price}</p>
@@ -32,6 +34,7 @@ const DisplayProduct = () => {
       <img src={product.image || 'placeholder_image.jpg'} alt={product.title} />
       <p>Status: {product.status}</p>
     </div>
+    </Layout>
   );
 }
 

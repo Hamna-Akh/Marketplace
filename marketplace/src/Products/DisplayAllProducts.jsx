@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './DisplayAllProducts.css';
+import Layout from '../Layout';
 
 function DisplayAllProducts() {
   const [products, setProducts] = useState([]);
@@ -18,23 +20,26 @@ function DisplayAllProducts() {
   };
 
   return (
-    <div>
-      <h1>Products</h1>
-      <ul>
-        {products.map(product => (
-          <li key={product.ListingID}>
-            <p>{product.listingId} </p>
-             <p> {product.title} </p>
-             <p> Price: ${product.price} </p>
-             <p> Description: {product.description} </p>
-             <p> Category: {product.category} </p>
-             <img src={product.image || 'placeholder_image.jpg'} alt={product.title}/>
-             <p> Status: {product.status} </p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+  <Layout>
+    <div className="product-container">
+          <h1>Products</h1>
+          <div className="product-grid">
+            {products.map(product => (
+              <div className="product-card" key={product.listingId}>
+                <img className="product-image" src={product.image || 'placeholder_image.jpg'} alt={product.title}/>
+                <div className="product-details">
+                  <p className="product-title">{product.title}</p>
+                  <p className="product-price">${product.price}</p>
+                  <p className="product-description">{product.description}</p>
+                  <p className="product-category">Category: {product.category}</p>
+                  <p className="product-status">Status: {product.status}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        </Layout>
+      );
+    }
 
 export default DisplayAllProducts;
