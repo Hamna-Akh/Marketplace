@@ -1,6 +1,7 @@
 package com.example.Marketplace.controller;
 
 import com.example.Marketplace.model.Product;
+import com.example.Marketplace.model.User;
 import com.example.Marketplace.repository.ProductRepository;
 import com.example.Marketplace.service.ProductService;
 import com.example.Marketplace.service.UserService;
@@ -56,5 +57,11 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
-
+    @GetMapping("/seller")
+    public ResponseEntity<List<Product>> getProductsByCurrentUser() {
+        User currentUser = userService.getCurrentUser();
+        int currentUserId = currentUser.getUserId();
+        List<Product> products = productService.getProductsBySellerId(currentUserId);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 }
