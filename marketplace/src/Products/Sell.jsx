@@ -4,10 +4,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../Layout';
 import './DisplayAllProducts.css';
 import './Sell.css'; // Import CSS file
+import DeleteConfirmation from './DeleteConfirmation';
+import './DisplayAllProducts.css';
 
 function Sell() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate(); // Initialize the useNavigate hook
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     fetchProducts();
@@ -23,20 +27,36 @@ function Sell() {
   };
 
   const handleCreateListing = () => {
-    // Redirect to the create new listing page
-    console.log('Create product');
     navigate('/create-product');
   };
 
-    const handleUpdate = (productId) => {
-      // Handle update logic
-      console.log('Updating product with ID:', productId);
-    };
+  const handleUpdate = (productId) => {
+    // Handle update logic
+    console.log('Updating product with ID:', productId);
+  };
 
-    const handleDelete = (productId) => {
-      // Handle delete logic
-      console.log('Deleting product with ID:', productId);
-    };
+  const handleDelete = (product) => {
+    setSelectedProduct(product);
+    setShowDeleteConfirmation(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      await axios.delete(`http://localhost:8080/products/${selectedProduct.listingId}`);
+      // Refresh products after deletion
+      fetchProducts();
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    } finally {
+      // Close the confirmation dialog
+      setShowDeleteConfirmation(false);
+    }
+  };
+
+  const handleDeleteCancel = () => {
+    // Close the confirmation dialog
+    setShowDeleteConfirmation(false);
+  };
 
 return (
     <Layout>
@@ -55,16 +75,15 @@ return (
                 <p className="product-status">Status: {product.status}</p>
                 <div className="product-actions">
                   <button onClick={() => handleUpdate(product.listingId)} className="action-button update-button">Update</button>
-                  <button onClick={() => handleDelete(product.listingId)} className="action-button delete-button">Delete</button>
+                  <button onClick={() => handleDelete(product)} className="action-button delete-button">Delete</button>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+      {showDeleteConfirmation && <DeleteConfirmation product={selectedProduct} onDelete={handleDeleteConfirm} onCancel={handleDeleteCancel} />}
     </Layout>
   );
 }
-
-
 export default Sell;
