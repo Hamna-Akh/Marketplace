@@ -31,8 +31,7 @@ function Sell() {
   };
 
   const handleUpdate = (productId) => {
-    // Handle update logic
-    console.log('Updating product with ID:', productId);
+     navigate(`/update-product/${productId}`);
   };
 
   const handleDelete = (product) => {
