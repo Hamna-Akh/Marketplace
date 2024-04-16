@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button, Grid, Typography } from '@mui/material';
 import './Login.css'; // Import the CSS file
-import SignInSide from '../material-ui/sign-in-side/SignInSide';
+import SignInSide from './SignInSide';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
