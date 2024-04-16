@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, Divider } from '@mui/material';
-import { Home, Shop, MonetizationOn, Message } from '@mui/icons-material';
+import { Home, Shop, MonetizationOn, Message, Analytics } from '@mui/icons-material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Link } from 'react-router-dom';
@@ -39,6 +39,12 @@ function SideNavigationBar() {
                 <MonetizationOn />
               </ListItemIcon>
               <ListItemText primary="Sell" />
+            </ListItem>
+            <ListItem button key="Dashboard" component={Link} to="../dashboard">
+              <ListItemIcon>
+                <Analytics />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
             </ListItem>
             <ListItem button key="Messages">
               <ListItemIcon>

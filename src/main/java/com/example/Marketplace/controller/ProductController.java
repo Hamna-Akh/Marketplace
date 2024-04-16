@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.Map;
 import java.util.List;
 
 @RestController
@@ -64,4 +64,21 @@ public class ProductController {
         List<Product> products = productService.getProductsBySellerId(currentUserId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+
+    @GetMapping("/products/average-sales")
+    public ResponseEntity<Double> getAverageSales() {
+        User currentUser = userService.getCurrentUser();
+        int currentUserId = currentUser.getUserId();
+        double average = productService.getAverageSalesBySellerId(currentUserId);
+        return ResponseEntity.status(HttpStatus.OK).body(average);
+    }
+
+    @GetMapping("/products/sold-by-category")
+    public ResponseEntity<List<Map<String, Object>>> getSoldProductsByCategory() {
+        User currentUser = userService.getCurrentUser();
+        int currentUserId = currentUser.getUserId();
+        List<Map<String, Object>> countByCategory = productService.getCountByCategory(currentUserId);
+        return ResponseEntity.status(HttpStatus.OK).body(countByCategory);
+    }
+
 }

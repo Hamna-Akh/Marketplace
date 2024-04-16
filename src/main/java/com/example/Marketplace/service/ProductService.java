@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductService {
@@ -39,5 +40,14 @@ public class ProductService {
 
     public List<Product> getProductsBySellerId(int userId) {
         return productRepository.findBySellerId_UserId(userId);
+    }
+
+    public double getAverageSalesBySellerId(int currentUserId) {
+        return productRepository.findAverageSoldByUserId(currentUserId);
+    }
+
+
+    public List<Map<String, Object>> getCountByCategory(int currentUserId) {
+        return productRepository.findCategoriesSoldByUserId(currentUserId);
     }
 }

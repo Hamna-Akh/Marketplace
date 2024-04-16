@@ -6,6 +6,7 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import Link from '@mui/material/Link';
 import Title from './Title';
+import axios from 'axios';
 
 function preventDefault(event) {
   event.preventDefault();
@@ -15,10 +16,17 @@ export default function Products() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8080/products')
-      .then(response => response.json())
-      .then(data => setRows(data));
+    fetchProducts();
   }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/seller'); // Assuming your backend endpoint for fetching user's products is /seller
+      setRows(response.data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
 
   return (
     <React.Fragment>
@@ -47,9 +55,6 @@ export default function Products() {
           ))}
         </TableBody>
       </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        See more listings
-      </Link>
     </React.Fragment>
   );
 }
