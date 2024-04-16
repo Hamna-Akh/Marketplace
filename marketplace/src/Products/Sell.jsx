@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import Layout from '../Layout';
+import Layout from '../Components/Layout';
 import './DisplayAllProducts.css';
 import './Sell.css'; // Import CSS file
 import DeleteConfirmation from './DeleteConfirmation';

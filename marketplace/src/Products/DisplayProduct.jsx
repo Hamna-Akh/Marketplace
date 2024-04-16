@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Layout from '../Layout';
+import Layout from '../Components/Layout';
 
 const DisplayProduct = () => {
  const { id } = useParams();

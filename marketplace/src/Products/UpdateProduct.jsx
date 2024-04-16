@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, FormControl, InputLabel, Select, MenuItem, Box, Grid, Snackbar } from '@mui/material';
 import axios from 'axios';
-import Layout from '../Layout';
+import Layout from '../Components/Layout';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/lab/Alert';

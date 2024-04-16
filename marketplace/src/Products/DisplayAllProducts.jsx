@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './DisplayAllProducts.css';
-import Layout from '../Layout';
+import Layout from '../Components/Layout';
 
 function DisplayAllProducts() {
   const [products, setProducts] = useState([]);
