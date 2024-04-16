@@ -20,6 +20,10 @@ function CreateProduct() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const imageUpload = (e) => {
+    setFormData({ ...formData, image: URL.createObjectURL(e.target.files[0])})
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -102,13 +106,12 @@ function CreateProduct() {
             </FormControl>
           </Grid>
           <Grid item xs={12} container direction="column" alignItems="center">
-              <Grid item xs={12}>
+              <Grid item >
                 <img
                   width="100%"
                   name = "image"
 //                   value={formData.image}
                   src = {formData.image}
-
                 />
                 {console.log(formData.image)}
               </Grid>
@@ -117,11 +120,11 @@ function CreateProduct() {
                    Select Image
                    <input
                      accept="image/*"
-                     name='upload'
+                     name='image'
                      id="contained-button-file"
                      multiple
                      type="file"
-                     onChange={handleChange}
+                     onChange={imageUpload}
                    />
                  </Button>
               </label>
