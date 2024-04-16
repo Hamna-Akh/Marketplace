@@ -33,3 +33,10 @@ CREATE TABLE Messaging (
     FOREIGN KEY (SenderID) REFERENCES UserProfiles(UserID),
     FOREIGN KEY (ReceiverID) REFERENCES UserProfiles(UserID)
 );
+
+CREATE TABLE Images (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    type VARCHAR(255),
+    imagedata LONGBLOB
+);
