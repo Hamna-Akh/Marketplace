@@ -3,12 +3,12 @@
 import React from 'react';
 import SideNavBar from './SideNavBar';
 import Footer from './Footer';
-import backgroundImage from './BackgroundImage.jpg';
+import backgroundImage2 from './BackgroundImage2.png';
 
 function Layout({ children }) {
   return (
     <div style={{
-    backgroundImage: `url(${backgroundImage})`,
+    backgroundImage: `url(${backgroundImage2})`,
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh' }}>
