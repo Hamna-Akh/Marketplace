@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -13,25 +12,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
-
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Marketplace
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
-// TODO remove, this demo shouldn't need to reset the theme.
+import MarketplaceSidePanel from './MarketplaceSidePanel';
+import Copyright from '../Components/Copyright';
 
 const defaultTheme = createTheme();
 
-export default function SignInSide({ handleSubmit, setEmail, setPassword, email, password, error, setError }) {
+export default function SignIn({ handleSubmit, setEmail, setPassword, email, password, error }) {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     setEmail(event.currentTarget.email.value);
@@ -43,23 +29,7 @@ export default function SignInSide({ handleSubmit, setEmail, setPassword, email,
     <ThemeProvider theme={defaultTheme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={7}
-          sx={{
-            backgroundColor:'#1976d2', // blue
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Typography variant="h2" color="inherit" sx={{ color: '#fff' }}>
-            Marketplace
-          </Typography>
-        </Grid>
+        <MarketplaceSidePanel />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -107,6 +77,7 @@ export default function SignInSide({ handleSubmit, setEmail, setPassword, email,
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
+              {error && <p>{error}</p>}
               <Button
                 type="submit"
                 fullWidth
@@ -117,7 +88,7 @@ export default function SignInSide({ handleSubmit, setEmail, setPassword, email,
               </Button>
               <Grid container>
                 <Grid item>
-                  <RouterLink to="/users">
+                  <RouterLink to="/signup">
                     {"Don't have an account? Sign Up"}
                   </RouterLink>
                 </Grid>

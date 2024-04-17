@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { TextField, Button, Grid, Typography } from '@mui/material';
 import './Login.css'; // Import the CSS file
-import SignInSide from './SignInSide';
+import SignIn from './SignIn';
+import {getUsers, loginUser} from '../api/userAPI';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -13,34 +12,29 @@ const Login = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/users');
-            const users = response.data;
+            const users = await getUsers();
             const matchingUser = users.find(user => user.email === email && user.password === password);
-            if (matchingUser != null) {
-                console.log('Valid credentials');
-                const response = await axios.post('http://localhost:8080/login', matchingUser);
-                console.log(response.data);
+            if (matchingUser) {
+                await loginUser(matchingUser);
                 navigate('/products');
             } else {
-                console.log('Invalid credentials');
-                alert('The wrong email or password was entered. Please try again.');
+                setError('The wrong email or password was entered. Please try again.');
             }
         } catch (error) {
-            console.error('Failed to fetch users:', error);
+            setError('Failed to fetch users');
         }
     };
 
     return (
-        <SignInSide
-                handleSubmit={handleLogin}
-                setEmail={setEmail}
-                setPassword={setPassword}
-                email={email}
-                password={password}
-                error={error}
-                setError={setError}
-            />
-        
+        <SignIn
+            handleSubmit={handleLogin}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            email={email}
+            password={password}
+            error={error}
+            setError={setError}
+        />
     );
 };
 
