@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import Layout from '../Layout';
+import Layout from '../Components/Layout';
 import './DisplayAllProducts.css';
 import './Sell.css'; // Import CSS file
 import DeleteConfirmation from './DeleteConfirmation';
@@ -60,11 +60,13 @@ function Sell() {
 return (
     <Layout>
       <div className="product-container">
-        <h1>My Products</h1>
+      <div className="page-title">
+        <div className="page-name"> <h1>Manage My Products</h1> </div>
         <button className="create-listing-button" onClick={handleCreateListing}>Create New Listing</button>
+      </div>
         <div className="product-grid">
           {products.map(product => (
-            <div className="product-card" key={product.listingId}>
+            <div className="product-card"   style={{ border: '2px solid black'}} key={product.listingId}>
               <img className="product-image" src={product.image || 'placeholder_image.jpg'} alt={product.title}/>
               <div className="product-details">
                 <p className="product-title">{product.title}</p>

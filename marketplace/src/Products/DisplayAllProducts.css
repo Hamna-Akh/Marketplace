@@ -2,6 +2,17 @@
   padding: 20px;
 }
 
+.page-title{
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid black;
+}
+
+.page-name{
+  text-align: left;
+  padding: 15px;
+}
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -9,11 +20,12 @@
 }
 
 .product-card {
-  border: 1px solid #ccc;
+  width: 300px;
+  margin-top: 20px;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  background-color: white;
 }
 
 .product-card:hover {
@@ -24,6 +36,7 @@
   width: 100%;
   height: auto;
   object-fit: cover;
+  padding: 10px;
 }
 
 .product-details {
@@ -34,6 +47,7 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 5px;
+  text-align: center;
 }
 
 .product-price {
@@ -54,3 +68,56 @@
 .product-status {
   font-style: italic;
 }
+
+input[type="text"] {
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 20px;
+  width: 50%;
+}
+
+.input-container {
+  margin: 15px;
+  background-color: white;
+}
+
+.search-label {
+  margin-right: 10px;
+  font-size: 25px;
+}
+
+.filter-container {
+  margin-bottom: 20px;
+  background-color: white;
+  margin-right: 60px;
+}
+
+.filter-label {
+  margin-right: 10px;
+  font-size: 25px;
+}
+
+.filter-select {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-size: 25px;
+}
+
+.product-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sort-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Add margin on top */
+  margin-bottom: 20px;
+}
+
+.sort-controls button {
+  margin: 0 10px; /* Add space around the buttons */
+  padding: 10px 20px; /* Add padding to the buttons */
+  margin-bottom: 25px;
+}
+
