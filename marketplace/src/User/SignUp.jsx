@@ -1,7 +1,3 @@
-//
-// import React from 'react';
-
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
@@ -24,7 +20,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Marketplace
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -50,23 +46,34 @@ const SignUp = () => {
     const [profileT , setProfileT ] = useState(type.user);
     const [loggIn , setLoggIn] = useState(0);
     const navigate = useNavigate();
-
+    const [successMessage, setSuccessMessage] = useState('');
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
 
-        try{
-//         console.log(email,firstName,lastName,profileT);
-        const resp = await axios.post('http://localhost:8080/user', {email, password, firstName, lastName, profileT, loggIn});
+            if (!email || !password || !firstName || !lastName) {
+                alert('All fields are required');
+                return;
+            }
 
-//         console.log(resp.data);
+        try{
+        const resp = await axios.post('http://localhost:8080/user', {email, password, firstName, lastName, profileT, loggIn});
+               setSuccessMessage('User created successfully!');
+                // Clear input fields after successful submission
+                setEmail('');
+                setPassword('');
+                setFirstName('');
+                setLastName('');
+                // Navigate after a delay to display the success message
+                setTimeout(() => {
+                    navigate(-1);
+                }, 2000); // Navigate after 2 seconds
+
         }catch(error) {
-//         for now
         console.log(error.response);
         };
-        navigate(-1);
       };
 
      return (
@@ -98,6 +105,7 @@ const SignUp = () => {
                               id="firstName"
                               label="First Name"
                               autoFocus
+                              value={firstName}
                               onChange = {(e) => setFirstName(e.target.value)}
                             />
                           </Grid>
@@ -109,6 +117,7 @@ const SignUp = () => {
                               label="Last Name"
                               name="lastName"
                               autoComplete="family-name"
+                              value={lastName}
                               onChange ={(e) => setLastName(e.target.value)}
                             />
                           </Grid>
@@ -120,6 +129,7 @@ const SignUp = () => {
                               label="Email Address"
                               name="email"
                               autoComplete="email"
+                              value={email}
                               onChange = {(e) => setEmail(e.target.value)}
                             />
                           </Grid>
@@ -132,16 +142,16 @@ const SignUp = () => {
                               type="password"
                               id="password"
                               autoComplete="new-password"
+                              value={password}
                               onChange = {(e) => setPassword(e.target.value)}
                             />
                           </Grid>
-                          <Grid item xs={12}>
-                            <FormControlLabel
-                              control={<Checkbox value="allowExtraEmails" color="primary" />}
-                              label="I want to receive inspiration, marketing promotions and updates via email."
-                            />
-                          </Grid>
                         </Grid>
+                        {successMessage && (
+                                <Typography variant="h4" color="primary" align="center" sx={{ mt: 1 }}>
+                                    {successMessage}
+                                </Typography>
+                            )}
                         <Button
                           type="submit"
                           fullWidth
