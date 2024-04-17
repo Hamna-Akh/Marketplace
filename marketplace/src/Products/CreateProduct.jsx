@@ -15,17 +15,43 @@ function CreateProduct() {
 
   const [successMessage, setSuccessMessage] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [file, setFile] = useState('');
+  const [image, setImage] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const imageUpload = (e) => {
-    setFormData({ ...formData, image: URL.createObjectURL(e.target.files[0])})
+  const imageChange = (e) => {
+//     console.log(e.target.files[0]);
+    setFile(e.target.files[0]);
+    setFormData({...formData, image: e.target.files[0].name});
+    setImage(URL.createObjectURL(e.target.files[0]));
+//     console.log(formData.image)
   };
 
+console.log(image);
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+//     saving the image
+    const data = new FormData();
+        data.append('file', file);
+        try {
+              const response = await axios.post('http://localhost:8080/image', data,
+              {headers: {
+                'Content-Type': 'multipart/form-data'
+                }
+              }); // Assuming your backend is running on localhost:8080
+                  console.log(response);
+              // Optionally, redirect to the products list page or show a success message
+        } catch (error) {
+              console.error('Error creating product:', error);
+              // Handle error (e.g., display an error message to the user)
+
+        }
+
+//     saving the product
     try {
       await axios.post('http://localhost:8080/products', formData); // Assuming your backend is running on localhost:8080
           setFormData({
@@ -110,10 +136,9 @@ function CreateProduct() {
                 <img
                   width="100%"
                   name = "image"
-//                   value={formData.image}
-                  src = {formData.image}
+                  value={image}
+                  src = {image}
                 />
-                {console.log(formData.image)}
               </Grid>
               <label htmlFor="contained-button-file">
                  <Button variant="contained" component="span">
@@ -124,10 +149,13 @@ function CreateProduct() {
                      id="contained-button-file"
                      multiple
                      type="file"
-                     onChange={imageUpload}
+                     onChange={imageChange}
                    />
                  </Button>
               </label>
+{/*               <button onClick = {imageUpload}> */}
+{/*                 Upload */}
+{/*               </button> */}
           </Grid>
           <Grid item xs={12}>
             <FormControl variant="outlined" fullWidth>

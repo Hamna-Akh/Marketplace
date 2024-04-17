@@ -46,13 +46,11 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
-    @PostMapping(value = "/products", consumes = MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Product> create(@RequestBody Product product, @RequestPart("file") MultipartFile image) throws IOException {
+    @PostMapping(value = "/products")
+    public ResponseEntity<Product> create(@RequestBody Product product) throws IOException {
 
         product.setSellerId(userService.getCurrentUser());
 
-        String imageName = imageService.uploadImage(image);
-        product.setImage(imageService.downloadImage(imageName));
         Product newProduct = productService.createProduct(product);
 
         return ResponseEntity.status(HttpStatus.OK).body(newProduct);
@@ -71,3 +69,15 @@ public class ProductController {
 
 
 }
+
+
+//    @PostMapping(value = "/products")
+//    public ResponseEntity<Product> create(@RequestBody Product product, @RequestParam("file") MultipartFile image) throws IOException {
+//
+//        product.setSellerId(userService.getCurrentUser());
+//
+//        String imageName = imageService.uploadImage(image);
+//        Product newProduct = productService.createProduct(product);
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(newProduct);
+//    }

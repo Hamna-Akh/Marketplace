@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './DisplayAllProducts.css';
 import Layout from '../Layout';
+import DisplayImage from './DisplayImage.jsx';
 
 function DisplayAllProducts() {
   const [products, setProducts] = useState([]);
@@ -26,7 +27,7 @@ function DisplayAllProducts() {
           <div className="product-grid">
             {products.map(product => (
               <div className="product-card" key={product.listingId}>
-                <img className="product-image" src={product.image || 'placeholder_image.jpg'} alt={product.title}/>
+                <DisplayImage filename={product.image}/>
                 <div className="product-details">
                   <p className="product-title">{product.title}</p>
                   <p className="product-price">${product.price}</p>

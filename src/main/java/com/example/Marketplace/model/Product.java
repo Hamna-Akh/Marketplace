@@ -27,8 +27,12 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Category category;
     @Column(name = "image")
-    private byte[] image;
+    private String image;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status;
 }
+
+//    @OneToOne
+//    @JoinColumn(name = "image")
+//    private Image image;

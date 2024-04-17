@@ -14,13 +14,20 @@ import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 
 @RestController
 @RequestMapping("/image")
+@CrossOrigin
 public class ImageController {
 
     @Autowired
     private ImageService imageService;
 
+//    @PostMapping()
+//    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
+//        String uploadImage = imageService.uploadImage(file);
+//        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
+//    }
+
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
+    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
         String uploadImage = imageService.uploadImage(file);
         return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
     }
