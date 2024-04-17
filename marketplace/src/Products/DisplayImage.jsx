@@ -9,14 +9,16 @@ import axios from 'axios';
     }, [filename]);
 
     const fetchImage = async (filename) => {
-        try {
-            const imageByte = await axios.get(`http://localhost:8080/image/${filename}`); // fetching the byte[]
-            const blob = new Blob([imageByte.data], {type: 'image/png'});
-            const url = URL.createObjectURL(blob);
-            setImageUrl(url);
-            console.log(url);
-        } catch (error) {
-            console.error("error fetching image:", error);
+        if(filename){
+            try {
+                const imageByte = await axios.get(`http://localhost:8080/image/${filename}`); // fetching the byte[]
+                const blob = new Blob([imageByte.data], {type: 'image/png'});
+                const url = URL.createObjectURL(blob);
+                setImageUrl(url);
+                console.log(url);
+            } catch (error) {
+                console.error("error fetching image:", error);
+            }
         }
     };
     console.log(imageUrl);
