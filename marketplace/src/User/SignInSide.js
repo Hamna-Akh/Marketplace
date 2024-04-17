@@ -19,7 +19,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Marketplace
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -49,7 +49,7 @@ export default function SignInSide({ handleSubmit, setEmail, setPassword, email,
           sm={4}
           md={7}
           sx={{
-            backgroundColor: (theme) => theme.palette.success.light, // light green from the theme palette
+            backgroundColor:'#1976d2', // blue
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             display: 'flex',
