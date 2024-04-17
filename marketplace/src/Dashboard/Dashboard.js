@@ -7,7 +7,7 @@ import AverageSoldProducts from './AverageSoldProducts';
 import Products from './Products';
 import { Typography } from '@mui/material';
 import './Dashboard.css';
-import Layout from '../Layout';
+import Layout from '../Components/Layout';
 
 export default function Dashboard() {
     return (

@@ -95,7 +95,7 @@ function UpdateProduct() {
 
     return (
         <Layout>
-            <Box sx={{ maxWidth: 400, margin: 'auto', padding: 2 }}>
+            <Box sx={{ maxWidth: 400, margin: 'auto', padding: 2, marginBottom:'40px', backgroundColor: 'white', border: '2px solid black', borderRadius: '10px'  }}>
                 <h1>Update Product</h1>
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={2}>

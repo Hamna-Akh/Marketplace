@@ -19,7 +19,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { Home, Shop, MonetizationOn, Message } from '@mui/icons-material';
+import { Home, Shop, MonetizationOn, Message, Analytics } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -132,7 +132,7 @@ export default function MiniDrawer() {
           <Divider />
           <List>
             {[
-              { text: 'Home', icon: <Home />, to: '' },
+              { text: 'Dashboard', icon: <Analytics />, to: '../dashboard' },
               { text: 'Shop', icon: <Shop />, to: '../products' },
               { text: 'Sell', icon: <MonetizationOn />, to: '../sell' },
               { text: 'Messages', icon: <Message />, to: '' },
