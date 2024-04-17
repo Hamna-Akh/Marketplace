@@ -1,3 +1,10 @@
 .dashboard-container {
     padding: 20px;
 }
+
+.dashboard-card {
+    margin-top: 20px;
+    border-radius: 8px;
+    border: 2px solid black;
+
+}

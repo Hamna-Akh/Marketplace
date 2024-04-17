@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Pie } from 'react-chartjs-2';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 import { Chart, PieController, ArcElement, CategoryScale, Tooltip, Legend } from 'chart.js';
+import Title from './Title';
 
 Chart.register(PieController, ArcElement, CategoryScale, Tooltip, Legend);
 
@@ -12,7 +13,6 @@ export default function SoldItemsByCategory() {
   useEffect(() => {
     axios.get('http://localhost:8080/products/sold-by-category')
         .then(response => {
-            console.log(response.data);
             let labels = response.data.map(item => item['category']);
             let data = response.data.map(item => item['count']);
             const backgroundColors = {
@@ -46,9 +46,9 @@ export default function SoldItemsByCategory() {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" component="div">
+        <Title>
           Sold Items by Category
-        </Typography>
+        </Title>
         {chartData.labels && <Pie data={chartData} />}
       </CardContent>
     </Card>

@@ -4,13 +4,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import Link from '@mui/material/Link';
 import Title from './Title';
 import axios from 'axios';
-
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 export default function Products() {
   const [rows, setRows] = useState([]);
@@ -34,7 +29,6 @@ export default function Products() {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Listing ID</TableCell>
             <TableCell>Title</TableCell>
             <TableCell>Price</TableCell>
             <TableCell>Description</TableCell>
@@ -45,7 +39,6 @@ export default function Products() {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.listingId}>
-              <TableCell>{row.listingId}</TableCell>
               <TableCell>{row.title}</TableCell>
               <TableCell>{`$${row.price}`}</TableCell>
               <TableCell>{row.description}</TableCell>

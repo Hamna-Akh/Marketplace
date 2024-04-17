@@ -43,7 +43,11 @@ public class ProductService {
     }
 
     public double getAverageSalesBySellerId(int currentUserId) {
-        return productRepository.findAverageSoldByUserId(currentUserId);
+        Double average = productRepository.findAverageSoldByUserId(currentUserId);
+        if (average == null) {
+            return 0;
+        }
+        return average;
     }
 
 

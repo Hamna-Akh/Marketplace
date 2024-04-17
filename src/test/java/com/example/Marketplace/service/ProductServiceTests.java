@@ -9,9 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import lombok.Data;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
         import static org.mockito.Mockito.*;
@@ -77,5 +75,37 @@ class ProductServiceTest {
         productService.deleteProduct(1);
 
         verify(productRepository, times(1)).deleteById(1);
+    }
+
+    @Test
+    public void testGetAverageSalesBySellerId() {
+        int userId = 1;
+        Double expectedAverage = 100.0;
+        when(productRepository.findAverageSoldByUserId(userId)).thenReturn(expectedAverage);
+
+        double actualAverage = productService.getAverageSalesBySellerId(userId);
+
+        assertEquals(expectedAverage, actualAverage, "The average sales should match");
+    }
+
+    @Test
+    public void testGetAverageSalesBySellerIdWhenNull() {
+        int userId = 1;
+        when(productRepository.findAverageSoldByUserId(userId)).thenReturn(null);
+
+        double actualAverage = productService.getAverageSalesBySellerId(userId);
+
+        assertEquals(0, actualAverage, "The average sales should be 0 when the repository returns null");
+    }
+
+    @Test
+    public void testGetCountByCategory() {
+        int userId = 1;
+        List<Map<String, Object>> expectedList = new ArrayList<>();
+        when(productRepository.findCategoriesSoldByUserId(userId)).thenReturn(expectedList);
+
+        List<Map<String, Object>> actualList = productService.getCountByCategory(userId);
+
+        assertEquals(expectedList, actualList, "The category counts should match");
     }
 }

@@ -6,10 +6,6 @@ import { Typography } from '@mui/material';
 export default function AverageSoldProducts() {
   const [avgSales, setAvgSales] = useState(0);
 
-  function preventDefault(event) {
-    event.preventDefault();
-  }
-
   useEffect(() => {
     axios.get('http://localhost:8080/products/average-sales')
       .then(response => {

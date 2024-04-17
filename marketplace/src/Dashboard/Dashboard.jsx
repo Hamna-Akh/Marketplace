@@ -1,34 +1,36 @@
 import * as React from 'react';
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import SoldItemsByCategory from './SoldItemsByCategory';
 import AverageSoldProducts from './AverageSoldProducts';
 import Products from './Products';
-import { Typography } from '@mui/material';
 import './Dashboard.css';
+import '../App.css';
 import Layout from '../Components/Layout';
 
 export default function Dashboard() {
     return (
         <Layout>
             <div className="dashboard-container">
-                <h1>My Dashboard</h1>
+                <div className="page-title-container">
+                    <h1 className="page-name">My Dashboard</h1>
+                </div>
                 <Grid container spacing={3}>
-                    {/* Chart */}
-                    <Grid item xs={12} md={4} lg={3}>
-                        <Paper
+                    {/* Sold Items by Category - Pie Chart */}
+                    <Grid item xs={12} md={4} lg={3} >
+                        <Paper className="dashboard-card"
                             sx={{
                                 display: 'flex',
                                 flexDirection: 'column',
+                                
                             }}
                         >
                             <SoldItemsByCategory />
                         </Paper>
                     </Grid>
-                    {/* AverageSoldProducts */}
+                    {/* Average Sold Products */}
                     <Grid item xs={12} md={4} lg={3}>
-                        <Paper
+                        <Paper className="dashboard-card"
                             sx={{
                                 p: 2,
                                 display: 'flex',
@@ -39,14 +41,14 @@ export default function Dashboard() {
                             <AverageSoldProducts />
                         </Paper>
                     </Grid>
-                    {/* Recent Orders */}
+                    {/* Product Listings */}
                     <Grid item xs={12}>
-                        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+                        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }} className="dashboard-card">
                             <Products />
                         </Paper>
                     </Grid>
                 </Grid>
-             </div>
+            </div>
         </Layout>
     );
 }
