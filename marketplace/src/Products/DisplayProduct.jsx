@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Layout from '../Components/Layout';
+import './DisplayAllProducts.css';
 
 const DisplayProduct = () => {
  const { id } = useParams();
@@ -26,16 +27,20 @@ const DisplayProduct = () => {
 
   return (
   <Layout>
-    <div>
-      <h1>{product.title}</h1>
-      <p>Price: ${product.price}</p>
-      <p>Description: {product.description || 'N/A'}</p>
-      <p>Category: {product.category}</p>
+    <div className="product-card"   style={{ border: '2px solid black'}} >
       <img src={product.image || 'placeholder_image.jpg'} alt={product.title} />
-      <p>Status: {product.status}</p>
+      <div className="product-details">
+       <p className="product-title">{product.title}</p>
+       <p className="product-price">Price: ${product.price}</p>
+       <p className="product-description">Description: {product.description}</p>
+       <p className="product-category">Category: {product.category}</p>
+       <p className="product-status">Status: {product.status}</p>
+      </div>
     </div>
     </Layout>
   );
 }
+
+
 
 export default DisplayProduct;

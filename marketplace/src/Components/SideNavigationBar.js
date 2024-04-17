@@ -1,4 +1,4 @@
-// SideNavigationBar.js
+// SideNavigationBar.js TO BE DELETED
 
 import React, { useState } from 'react';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton, Divider } from '@mui/material';
@@ -51,11 +51,16 @@ function SideNavigationBar() {
         {/* Position the icon outside the drawer */}
         <IconButton
           style={{
-          position: 'absolute', left: open ? '250px' : '0', transition: 'left 0.3s'
+          position: 'absolute',
+          left: open ? '250px' : '0',
+          transition: 'left 0.3s',
+          backgroundColor: 'white',
+          border: '3px solid black',
+          padding: '8px',
           }}
           onClick={handleToggleDrawer}
         >
-          {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+          {open ? <ChevronLeftIcon sx={{ fontSize: 50 }} /> : <ChevronRightIcon sx={{ fontSize: 50 }}/>}
         </IconButton>
       </>
     );
