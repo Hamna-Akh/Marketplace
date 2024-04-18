@@ -5,12 +5,15 @@ import Layout from '../Components/Layout';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Alert from '@mui/lab/Alert';
+import DisplayImage from './DisplayImage.jsx'; // Import DisplayImage component
 
 function UpdateProduct() {
     const navigate = useNavigate();
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [file, setFile] = useState('');
+    const [image, setImage] = useState('');
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [formData, setFormData] = useState({
@@ -20,7 +23,6 @@ function UpdateProduct() {
         category: '',
         image: '',
         status: ''
-        // Add other fields as needed
     });
     
     useEffect(() => {
@@ -32,6 +34,7 @@ function UpdateProduct() {
             const response = await axios.get(`http://localhost:8080/products/${id}`);
             setFormData(response.data);
             setProduct(response.data);
+            //setImage(URL.createObjectURL(response.data.image)); // Set the current image when fetching the product
         } catch (error) {
             console.error('Error fetching product:', error);
         }
@@ -39,6 +42,12 @@ function UpdateProduct() {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const imageChange = (e) => {
+        setFile(e.target.files[0]);
+        setFormData({...formData, image: e.target.files[0].name});
+        setImage(URL.createObjectURL(e.target.files[0]));
     };
 
     const handleSubmit = async (e) => {
@@ -68,7 +77,19 @@ function UpdateProduct() {
             setOpenSnackbar(true);
             return;
         }
-        
+
+        const data = new FormData();
+            data.append('file', file);
+            try {
+                const response = await axios.post('http://localhost:8080/image', data,
+            {headers: {
+                  'Content-Type': 'multipart/form-data'
+               }
+            });
+            } catch (error) {
+                  console.error('Error creating product:', error);
+            }
+
         try {
             await axios.put(`http://localhost:8080/products/${id}`, formData);
             setFormData({
@@ -85,7 +106,6 @@ function UpdateProduct() {
         } catch (error) {
             console.error('Error updating product:', error);
             setOpenSnackbar(true);
-            // Handle error (e.g., display an error message to the user)
         }
     };
 
@@ -149,15 +169,32 @@ function UpdateProduct() {
                                 </Select>
                             </FormControl>
                         </Grid>
+                         {/* Display the current image of the product */}
                         <Grid item xs={12}>
-                            <TextField
-                                label="Image URL"
-                                variant="outlined"
-                                name="image"
-                                value={formData.image}
-                                onChange={handleChange}
-                                fullWidth
+                            <DisplayImage filename={product && product.image} />
+                        </Grid>
+                        <Grid item xs={12} container direction="column" alignItems="center">
+                          <Grid item >
+                            <img
+                              width="100%"
+                              name = "image"
+                              value={image}
+                              src = {image}
                             />
+                          </Grid>
+                          <label htmlFor="contained-button-file">
+                             <Button variant="contained" component="span">
+                               Select Image
+                               <input
+                                 accept="image/*"
+                                 name='image'
+                                 id="contained-button-file"
+                                 multiple
+                                 type="file"
+                                 onChange={imageChange}
+                               />
+                             </Button>
+                          </label>
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl variant="outlined" fullWidth>

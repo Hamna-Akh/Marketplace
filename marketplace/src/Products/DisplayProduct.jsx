@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Layout from '../Components/Layout';
+import DisplayImage from './DisplayImage.jsx';
 import './DisplayAllProducts.css';
 
 const DisplayProduct = () => {
@@ -27,8 +28,8 @@ const DisplayProduct = () => {
 
   return (
   <Layout>
-    <div className="product-card"   style={{ border: '2px solid black'}} >
-      <img src={product.image || 'placeholder_image.jpg'} alt={product.title} />
+    <div className="product-card"   style={{ border: '2px solid black', marginBottom: '20px' }} >
+      <DisplayImage filename={product.image}/>
       <div className="product-details">
        <p className="product-title">{product.title}</p>
        <p className="product-price">Price: ${product.price}</p>

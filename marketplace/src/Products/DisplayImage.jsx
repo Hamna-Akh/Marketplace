@@ -22,25 +22,18 @@ import axios from 'axios';
         if(filename){
             try {
                 const imageByte = await axios.get(`http://localhost:8080/image/${filename}`, {responseType:"blob"}); // fetching the byte[]
-//                 const bigEndianData = imageByte.data;
-//                 const littleEndianData = bigEndianToLittleEndian(bigEndianData);
-//                 const blob = new Blob([imageByte], {type: 'image/png'});
                 const url = URL.createObjectURL(imageByte.data);
                 setImageUrl(url);
-                console.log(imageByte);
-//                 console.log(littleEndianData)
             } catch (error) {
                 console.error("error fetching image:", error);
             }
         }
     };
-    console.log(imageUrl);
+
     return (
       <div>
         {imageUrl && (
-//           <img src={imageUrl} alt="Uploaded Image" style={{ maxWidth: '100%', maxHeight: '100%' }} />
-          <img src={imageUrl} alt={filename}/>
-//           <img className="product-image" src={imageUrl || 'placeholder_image.jpg'} alt={filename}/>
+          <img src={imageUrl} alt={filename} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}/>
         )}
       </div>
     );

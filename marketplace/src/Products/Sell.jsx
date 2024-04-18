@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Layout from '../Components/Layout';
+import DisplayImage from './DisplayImage.jsx';
 import './DisplayAllProducts.css';
 import './Sell.css'; // Import CSS file
 import DeleteConfirmation from './DeleteConfirmation';
@@ -67,7 +68,7 @@ return (
         <div className="product-grid">
           {products.map(product => (
             <div className="product-card"   style={{ border: '2px solid black'}} key={product.listingId}>
-              <img className="product-image" src={product.image || 'placeholder_image.jpg'} alt={product.title}/>
+              <DisplayImage filename={product.image}/>
               <div className="product-details">
                 <p className="product-title">{product.title}</p>
                 <p className="product-price">${product.price}</p>
