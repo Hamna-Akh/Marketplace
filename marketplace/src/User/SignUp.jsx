@@ -31,20 +31,31 @@ const SignUp = () => {
   const [loggIn, setLoggIn] = useState(0);
   const navigate = useNavigate();
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const isValidEmail = (email) => {
+  // Regular expression to match email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
     if (!email || !password || !firstName || !lastName) {
-      alert('All fields are required');
+      setErrorMessage('All fields are required');
       return;
     }
+      if (!isValidEmail(email)) {
+        setErrorMessage('Invalid email format');
+        return;
+      }
 
     try {
       const resp = await axios.post('http://localhost:8080/user', { email, password, firstName, lastName, profileT, loggIn });
       setSuccessMessage('User created successfully!');
-      // Clear input fields after successful submission
+      setErrorMessage('');
       setEmail('');
       setPassword('');
       setFirstName('');
@@ -55,7 +66,11 @@ const SignUp = () => {
       }, 2000); // Navigate after 2 seconds
 
     } catch (error) {
-      console.log(error.response);
+      if (error.response && error.response.status === 500) {
+              setErrorMessage('Email already in use');
+            } else {
+              console.log(error.response);
+            }
     };
   };
 
@@ -133,8 +148,13 @@ const SignUp = () => {
                   />
                 </Grid>
               </Grid>
+              {errorMessage && (
+                    <Typography variant="h6" color="error" align="center" sx={{ mt: 1 }}>
+                        {errorMessage}
+                        </Typography>
+                )}
               {successMessage && (
-                <Typography variant="h4" color="primary" align="center" sx={{ mt: 1 }}>
+                <Typography variant="h6" color="primary" align="center" sx={{ mt: 1 }}>
                   {successMessage}
                 </Typography>
               )}

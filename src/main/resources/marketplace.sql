@@ -19,7 +19,7 @@ CREATE TABLE ProductListings (
     Price DECIMAL(10, 2) NOT NULL,
     Description TEXT,
     Category ENUM('CLOTHES', 'ELECTRONICS', 'FURNITURE', 'BEAUTY', 'ENTERTAINMENT'),
-    Image TEXT,
+    Image VARCHAR(100),
     Status ENUM('ACTIVE', 'INACTIVE','SOLD') NOT NULL,
     FOREIGN KEY (SellerID) REFERENCES UserProfiles(UserID)
 );
@@ -36,7 +36,7 @@ CREATE TABLE Messaging (
 
 CREATE TABLE Images (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(255) UNIQUE,
     type VARCHAR(255),
     imagedata LONGBLOB
 );

@@ -77,7 +77,11 @@ export default function SignIn({ handleSubmit, setEmail, setPassword, email, pas
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               />
-              {error && <p>{error}</p>}
+              {error && (
+                <Typography variant="h6" color="error" align="center" sx={{ mt: 1 }}>
+                  {error}
+                </Typography>
+              )}
               <Button
                 type="submit"
                 fullWidth
