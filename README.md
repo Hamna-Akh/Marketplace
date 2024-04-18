@@ -25,9 +25,7 @@ Chart.js: Simple yet flexible JavaScript charting library.
 Axios: Promise-based HTTP client for making API requests.
 
 ### Backend:
-Node.js: JavaScript runtime environment for server-side development.
-
-Express.js: Web application framework for Node.js.
+Springboot: Java framework that provides streamlined setup.
 
 MySql: SQL database for storing user and product data.
 
