@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './DisplayAllProducts.css';
+import DisplayImage from './DisplayImage.jsx';
 import Layout from '../Components/Layout';
 import { Link } from 'react-router-dom';
 
@@ -108,7 +109,7 @@ function DisplayAllProducts() {
             {filteredProducts.map(product => (
              <Link to={`/product/${product.listingId}`} key={product.listingId} className="product-link">
               <div className="product-card"   style={{ border: '2px solid black'}} key={product.listingId}>
-                <img className="product-image" src={product.image || 'placeholder_image.jpg'} alt={product.title}/>
+                <DisplayImage filename={product.image}/>
                 <div className="product-details">
                   <p className="product-title">{product.title}</p>
                   <p className="product-price">${product.price}</p>

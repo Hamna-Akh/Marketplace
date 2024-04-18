@@ -3,15 +3,22 @@ package com.example.Marketplace.controller;
 import com.example.Marketplace.model.Product;
 import com.example.Marketplace.model.User;
 import com.example.Marketplace.repository.ProductRepository;
+import com.example.Marketplace.service.ImageService;
 import com.example.Marketplace.service.ProductService;
 import com.example.Marketplace.service.UserService;
 import com.example.Marketplace.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
+
+import static org.springframework.http.MediaType.*;
 
 @RestController
 @RequestMapping()
@@ -22,6 +29,9 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private ImageService imageService;
 
 
     @GetMapping("/products")
@@ -38,9 +48,11 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
-    @PostMapping("/products")
-    public ResponseEntity<Product> create(@RequestBody Product product){
+    @PostMapping(value = "/products")
+    public ResponseEntity<Product> create(@RequestBody Product product) throws IOException {
+
         product.setSellerId(userService.getCurrentUser());
+
         Product newProduct = productService.createProduct(product);
 
         return ResponseEntity.status(HttpStatus.OK).body(newProduct);

@@ -18,11 +18,22 @@ function CreateProduct() {
   const [successMessage, setSuccessMessage] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [file, setFile] = useState('');
+  const [image, setImage] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const imageChange = (e) => {
+//     console.log(e.target.files[0]);
+    setFile(e.target.files[0]);
+    setFormData({...formData, image: e.target.files[0].name});
+    setImage(URL.createObjectURL(e.target.files[0]));
+//     console.log(formData.image)
+  };
+
+console.log(image);
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Check if all required fields are filled
@@ -50,6 +61,25 @@ function CreateProduct() {
       setOpenSnackbar(true);
       return;
     }
+
+//     saving the image
+    const data = new FormData();
+        data.append('file', file);
+        try {
+              const response = await axios.post('http://localhost:8080/image', data,
+              {headers: {
+                'Content-Type': 'multipart/form-data'
+                }
+              }); // Assuming your backend is running on localhost:8080
+                  console.log(response);
+              // Optionally, redirect to the products list page or show a success message
+        } catch (error) {
+              console.error('Error creating product:', error);
+              // Handle error (e.g., display an error message to the user)
+
+        }
+
+//     saving the product
     try {
       await axios.post('http://localhost:8080/products', {...formData, status: 'ACTIVE'}); // Assuming your backend is running on localhost:8080
       setFormData({
@@ -128,22 +158,41 @@ function CreateProduct() {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Image URL"
-                variant="outlined"
-                name="image"
-                value={formData.image}
-                onChange={handleChange}
-                fullWidth
-              />
+            <Grid item xs={12} container direction="column" alignItems="center">
+              <Grid item >
+                <img
+                  width="100%"
+                  name = "image"
+                  value={image}
+                  src = {image}
+                />
+              </Grid>
+              <label htmlFor="contained-button-file">
+                 <Button variant="contained" component="span">
+                   Select Image
+                   <input
+                     accept="image/*"
+                     name='image'
+                     id="contained-button-file"
+                     multiple
+                     type="file"
+                     onChange={imageChange}
+                   />
+                 </Button>
+              </label>
+{/*               <button onClick = {imageUpload}> */}
+{/*                 Upload */}
+{/*               </button> */}
             </Grid>
             <Grid item xs={12}>
               <Button type="submit" variant="contained" color="primary">Create Product</Button>
             </Grid>
           </Grid>
         </form>
-        <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+        <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}>
           {errorMessage ? (
             <Alert onClose={handleCloseSnackbar} severity="error">
               {errorMessage}

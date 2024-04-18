@@ -32,3 +32,7 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Status status;
 }
+
+//    @OneToOne
+//    @JoinColumn(name = "image")
+//    private Image image;
