@@ -62,9 +62,11 @@ console.log(image);
       return;
     }
 
+
 //     saving the image
     const data = new FormData();
         data.append('file', file);
+        let valid = true;
         try {
               const response = await axios.post('http://localhost:8080/image', data,
               {headers: {
@@ -75,27 +77,32 @@ console.log(image);
               // Optionally, redirect to the products list page or show a success message
         } catch (error) {
               console.error('Error creating product:', error);
+              setErrorMessage("invald image size");
+              setOpenSnackbar(true);
+              valid = false;
               // Handle error (e.g., display an error message to the user)
 
         }
 
 //     saving the product
-    try {
-      await axios.post('http://localhost:8080/products', {...formData, status: 'ACTIVE'}); // Assuming your backend is running on localhost:8080
-      setFormData({
-        title: '',
-        price: '',
-        description: '',
-        category: '',
-        image: ''
-      });
-      setSuccessMessage('Product created successfully!');
-      setOpenSnackbar(true);
-      navigate('/sell');  // Redirect to /sell
-    } catch (error) {
-      console.error('Error creating product:', error);
-      // Handle error (e.g., display an error message to the user)
-    }
+        if(valid){
+            try {
+              await axios.post('http://localhost:8080/products', {...formData, status: 'ACTIVE'}); // Assuming your backend is running on localhost:8080
+              setFormData({
+                title: '',
+                price: '',
+                description: '',
+                category: '',
+                image: ''
+              });
+              setSuccessMessage('Product created successfully!');
+              setOpenSnackbar(true);
+              navigate('/sell');  // Redirect to /sell
+            } catch (error) {
+              console.error('Error creating product:', error);
+              // Handle error (e.g., display an error message to the user)
+            }
+        }
   };
 
   const handleCloseSnackbar = () => {
